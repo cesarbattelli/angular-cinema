@@ -9,10 +9,10 @@
       <mat-label>Overview</mat-label>
       <textarea matInput formControlName="overview"></textarea>
     </mat-form-field>
-    <mat-form-field class="w-full">
-      <mat-label>Backdrop Path</mat-label>
-      <input matInput formControlName="backdrop_path" />
-    </mat-form-field>
+
+    @if (data?.userMovie || !data) {
+      <input type="file" (change)="handleFileInput($event)" />
+    }
     <div mat-dialog-actions class="w-full">
       <button mat-button (click)="close()">Cancel</button>
       <button mat-raised-button color="primary" type="submit">

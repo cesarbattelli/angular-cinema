@@ -31,6 +31,8 @@ export class MovieCardComponent {
   }
 
   getImage() {
-    return this.imageBaseUrl + '/w500' + this.movie.backdrop_path;
+    return this.movie.userMovie
+      ? this.movie.backdrop_path
+      : `https://image.tmdb.org/t/p/w500${this.movie.backdrop_path}`;
   }
 }

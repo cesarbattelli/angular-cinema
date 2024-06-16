@@ -41,6 +41,8 @@ export class MyFavoritesComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        result.id = Date.now();
+        result.userMovie = true;
         this.favoriteService.addFavorite(result);
       }
     });
@@ -54,8 +56,12 @@ export class MyFavoritesComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.favoriteService.updatePersonalOverview(result.id, result.overview);
-        this.favoriteService.updatePersonalRate(result.id, result.personalRate);
+        this.favoriteService.updateMovie(
+          result.id,
+          result.title,
+          result.overview,
+          result.backdrop_path
+        );
       }
     });
   }

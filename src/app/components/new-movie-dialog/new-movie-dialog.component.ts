@@ -40,7 +40,7 @@ export class NewMovieDialogComponent {
     this.movieForm = this.fb.group({
       title: [data?.title || '', Validators.required],
       overview: [data?.overview || '', Validators.required],
-      backdrop_path: [data?.backdrop_path || '', Validators.required],
+      backdrop_path: [data?.backdrop_path || ''],
     });
   }
 
@@ -52,5 +52,18 @@ export class NewMovieDialogComponent {
 
   close() {
     this.dialogRef.close();
+  }
+
+  handleFileInput(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.movieForm.patchValue({
+          backdrop_path: reader.result as string,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

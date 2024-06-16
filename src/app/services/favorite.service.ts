@@ -29,20 +29,20 @@ export class FavoriteService {
     return movies.some((movie) => movie.id === movieId);
   }
 
-  updatePersonalOverview(movieId: number, personalOverview: string): void {
+  updateMovie(
+    movieId: number,
+    title: string,
+    personalOverview: string,
+    image: string,
+    userMovie?: boolean
+  ): void {
     const movies = this.getFavoriteMovies();
     const movieIndex = movies.findIndex((movie) => movie.id === movieId);
     if (movieIndex !== -1) {
-      movies[movieIndex].personalOverview = personalOverview;
-      this.saveFavoriteMovies(movies);
-    }
-  }
-
-  updatePersonalRate(movieId: number, personalRate: number): void {
-    const movies = this.getFavoriteMovies();
-    const movieIndex = movies.findIndex((movie) => movie.id === movieId);
-    if (movieIndex !== -1) {
-      movies[movieIndex].personalRate = personalRate;
+      movies[movieIndex].title = title;
+      movies[movieIndex].overview = personalOverview;
+      movies[movieIndex].backdrop_path = image;
+      movies[movieIndex].userMovie = userMovie;
       this.saveFavoriteMovies(movies);
     }
   }
