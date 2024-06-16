@@ -1,1 +1,27 @@
-<p>my-favorites works!</p>
+<div class="mb-8 flex justify-between">
+  <h1>My favorites movies</h1>
+  <button mat-raised-button color="primary" (click)="newMovie()">
+    ADD NEW MOVIE
+  </button>
+</div>
+
+@if (movies.length > 0) {
+  <div
+    class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
+  >
+    @for (movie of movies; track movie.id) {
+      <div class="relative w-full h-auto hover:z-30">
+        <app-movie-card [movie]="movie"></app-movie-card>
+        <div class="absolute top-0 right-0 m-2">
+          <button mat-mini-fab color="primary" (click)="editMovie(movie)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+} @else {
+  <div>
+    <span>No favorite movies added</span>
+  </div>
+}

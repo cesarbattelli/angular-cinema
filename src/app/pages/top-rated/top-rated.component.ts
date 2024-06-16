@@ -1,23 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { IMovie } from '../../../interfaces/common';
 import { catchError, finalize } from 'rxjs';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-top-rated',
   standalone: true,
-  imports: [MatPaginatorModule, MovieCardComponent, MatGridListModule],
+  imports: [
+    MatPaginatorModule,
+    MovieCardComponent,
+    MatGridListModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './top-rated.component.html',
   styleUrl: './top-rated.component.css',
 })
 export class TopRatedComponent implements OnInit {
   private movieService = inject(MovieService);
-  private currentPage = 1;
+  public currentPage = 1;
   public movies: IMovie[] = [];
-  public imageBaseUrl = 'https://image.tmdb.org/t/p';
+  public totalPages = 0;
   public isLoading = true;
   public error = null;
 
@@ -25,15 +31,11 @@ export class TopRatedComponent implements OnInit {
     this.loadMovies();
   }
 
-  async loadMovies() {
+  loadMovies(page = 1) {
     this.error = null;
-
-    if (!event) {
-      this.isLoading = true;
-    }
-
+    this.isLoading = true;
     this.movieService
-      .getTopRatedMovies(this.currentPage)
+      .getTopRatedMovies(page)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -45,12 +47,14 @@ export class TopRatedComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          this.movies.push(...res.results);
-          // event?.target.complete();
-          // if (event) {
-          //   event.target.disabled = res.total_pages === this.currentPage;
-          // }
+          this.movies = res.results;
+          this.totalPages = res.total_pages;
         },
       });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.loadMovies(this.currentPage);
   }
 }

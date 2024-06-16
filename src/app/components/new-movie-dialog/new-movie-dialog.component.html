@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ data ? 'Edit Movie' : 'Add New Movie' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="movieForm" (ngSubmit)="submit()">
+    <mat-form-field class="w-full">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Overview</mat-label>
+      <textarea matInput formControlName="overview"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Backdrop Path</mat-label>
+      <input matInput formControlName="backdrop_path" />
+    </mat-form-field>
+    <div mat-dialog-actions class="w-full">
+      <button mat-button (click)="close()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">
+        {{ data ? 'Save' : 'Add' }}
+      </button>
+    </div>
+  </form>
+</div>
