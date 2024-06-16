@@ -1,0 +1,30 @@
+<h1>Top rated movies</h1>
+
+<!-- <mat-grid-list cols="5" rowHeight="1:1"> -->
+<div
+  fxLayout="row"
+  fxLayoutGap="16px"
+  fxLayoutAlign="center center"
+  fxLayout.xs="column"
+>
+  @for (movie of movies; track movie.id) {
+    <!-- <mat-grid-tile> -->
+    <div fxFlex="25%">
+      <app-movie-card
+        [title]="movie.title"
+        [description]="movie.overview"
+        [imageUrl]="imageBaseUrl + '/w500' + movie.backdrop_path"
+      ></app-movie-card>
+    </div>
+    <!-- </mat-grid-tile> -->
+  }
+</div>
+<!-- </mat-grid-list> -->
+
+<mat-paginator
+  [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+>
+</mat-paginator>
