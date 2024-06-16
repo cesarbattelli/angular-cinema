@@ -14,6 +14,7 @@ import {
 import { IMovie } from '../../../interfaces/common';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-new-movie-dialog',
@@ -25,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
     MatLabel,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
   ],
   templateUrl: './new-movie-dialog.component.html',
   styleUrl: './new-movie-dialog.component.css',

@@ -13,7 +13,7 @@
     @if (data?.userMovie || !data) {
       <input type="file" (change)="handleFileInput($event)" />
     }
-    <div mat-dialog-actions class="w-full">
+    <div mat-dialog-actions class="w-full flex justify-between mt-4">
       <button mat-button (click)="close()">Cancel</button>
       <button mat-raised-button color="primary" type="submit">
         {{ data ? 'Save' : 'Add' }}

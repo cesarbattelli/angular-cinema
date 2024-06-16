@@ -7,11 +7,12 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { NewMovieDialogComponent } from '../../components/new-movie-dialog/new-movie-dialog.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-my-favorites',
   standalone: true,
-  imports: [MovieCardComponent, MatIcon, MatButtonModule],
+  imports: [MovieCardComponent, MatIcon, MatButtonModule, RouterModule],
   templateUrl: './my-favorites.component.html',
   styleUrls: ['./my-favorites.component.css'],
 })

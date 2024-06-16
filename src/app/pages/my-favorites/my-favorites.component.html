@@ -7,7 +7,7 @@
 
 @if (movies.length > 0) {
   <div
-    class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-8"
   >
     @for (movie of movies; track movie.id) {
       <div class="relative w-full h-auto hover:z-30">
@@ -22,6 +22,6 @@
   </div>
 } @else {
   <div>
-    <span>No favorite movies added</span>
+    <span>No favorites movies added</span>
   </div>
 }

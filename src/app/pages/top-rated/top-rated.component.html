@@ -2,26 +2,28 @@
   <h1>Top rated movies</h1>
 </div>
 
-@if (isLoading) {
-  <div class="flex justify-center mb-8">
-    <mat-spinner></mat-spinner>
-  </div>
-} @else {
-  <div
-    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
-  >
-    @for (movie of movies; track movie.id) {
-      <div class="w-full h-auto hover:z-30">
-        <app-movie-card [movie]="movie"></app-movie-card>
-      </div>
-    }
-  </div>
-}
+<div class="bg-slate-50 p-4">
+  @if (isLoading) {
+    <div class="flex justify-center mb-8">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-8"
+    >
+      @for (movie of movies; track movie.id) {
+        <div class="w-full h-auto hover:z-30">
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </div>
+      }
+    </div>
+  }
 
-<mat-paginator
-  [length]="totalPages"
-  [pageSize]="20"
-  (page)="onPageChange($event)"
-  aria-label="Select page"
->
-</mat-paginator>
+  <mat-paginator
+    [length]="totalPages"
+    [pageSize]="20"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>
